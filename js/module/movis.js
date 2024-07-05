@@ -31,4 +31,44 @@ export class movis extends connect {
         let res = await  this.collection.find({"format.name": "Bluray", "format.copies": {$gt: 200}} ,{_id:0, name: 1, format: 1}).toArray();
         return res;
     }
+
+    async getMoviesWithCharacterNicknamedCobb(){
+        let res = await this.collection.find({"character.apodo": "Cobb"} ,{_id:0, name: 1, character: 1})
+        return res;
+    }
+
+    async getMoviesWithActorsId2AndId3(){
+        let res = await this.collection.find({"character.id_actor": {$in:[2,3]}},{name: 1, character: 1})
+        return res;
+    }
+
+    async getMoviesWithFormatBluray(){
+        let res = await this.collection.find({"format.name": {$eq: "Bluray"}} ,{name: 1, format:1})
+        return res;
+    }
+
+    async getMoviesWithGenreScienceFiction(){
+        let res = await this.collection.find({genre: {$elemMatch: {$eq: "Ciencia Ficción"}}},{_id: 0, name:1, genre:1})
+        return res;
+    }
+
+    async getMoviesWithLeadRoleNamedMiguel(){
+        let res = await this.collection.find({"character.rol": "principal" ,"character.apodo": "Miguel"} ,{_id:0, name: 1, character: 1})
+        return res;
+    }
+
+    async getMoviesWithAnyFormatOver100Copies(){
+        let res = await this.collection.find({"format.copies": {$gt: 100}} ,{_id:0, name: 1, format: 1})
+        return res;
+    }
+
+    async getMoviesWithActorId1(){
+        let res = await this.collection.find({"character.id_actor": {$in:[1]}},{name: 1, character: 1})
+        return res;
+    }
+
+    async getMoviesWithSupportingCharacterNicknamedArthur(){
+        let res = await this.collection.find({"character.rol": "secundario" ,"character.apodo": "Arthur"} ,{_id:0, name: 1, character: 1})
+        return res;
+    }
 }
